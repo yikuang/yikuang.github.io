@@ -1,0 +1,65 @@
+
+-----------------------------------
+App.Run()
+-----------------------------------
+        initWindow();
+        initVulkan();
+        mainLoop();
+        cleanup();
+
+
+-----------------------------------
+initWindow()
+-----------------------------------
+        glfwInit();
+        glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+        window = glfwCreateWindow(WIDTH, HEIGHT, "Vulkan", nullptr, nullptr);
+        glfwSetWindowUserPointer(window, this);
+        glfwSetFramebufferSizeCallback(window, framebufferResizeCallback);
+
+-----------------------------------
+initVulkan()
+-----------------------------------
+        createInstance();
+        setupDebugMessenger();
+        createSurface();
+        pickPhysicalDevice();
+        createLogicalDevice();
+        createSwapChain();
+        createImageViews();
+        createRenderPass();
+        createDescriptorSetLayout();
+        createGraphicsPipeline();
+        createCommandPool();
+        createDepthResources();
+        createFramebuffers();
+        createTextureImage();
+        createTextureImageView();
+        createTextureSampler();
+        loadModel();
+        createVertexBuffer();
+        createIndexBuffer();
+        createUniformBuffers();
+        createDescriptorPool();
+        createDescriptorSets();
+        createCommandBuffers();
+        createSyncObjects();
+
+
+
+-----------------------------------
+ mainLoop()
+-----------------------------------
+            glfwPollEvents();
+            drawFrame();
+
+
+-----------------------------------
+ cleanup()
+-----------------------------------
+        vkDestroyImageView(device, depthImageView, nullptr);
+        vkDestroyImage(device, depthImage, nullptr);
+        vkFreeMemory(device, depthImageMemory, nullptr);
+        vkDestroyFramebuffer(device, framebuffer, nullptr);
+        vkDestroyImageView(device, imageView, nullptr);
+        vkDestroySwapchainKHR(device, swapChain, nullptr);
